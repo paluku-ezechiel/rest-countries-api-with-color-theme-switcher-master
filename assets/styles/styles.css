@@ -18,5 +18,51 @@
 
 body {
   font-family: "Nunito Sans", sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--Grey_950);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--Blue_900);
+  color: var(--White);
+  padding: 1.5rem 2rem;
+}
+
+.container h1 {
+  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.mode-dark {
+  cursor: pointer;
+}
+
+.mode-dark i {
+  margin-right: 1rem;
 }
