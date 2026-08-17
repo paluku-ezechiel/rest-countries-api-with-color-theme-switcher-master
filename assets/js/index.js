@@ -1,0 +1,107 @@
+const countriesAllElement = document.querySelector(".countries");
+
+const createNodesCountry = (country) => {
+  const countriesElement = document.createElement("div");
+  countriesElement.classList.add("countries-elements");
+
+  const divCountries = document.createElement("div");
+  divCountries.classList.add("image-country");
+
+  const img = document.createElement("img");
+  img.src = `${country.flags.png}`;
+  img.alt = `${country.name}`;
+
+  const titleCountry = document.createElement("div");
+  titleCountry.classList.add("title-country");
+
+  const h2 = document.createElement("h2");
+  h2.classList.add("title");
+  h2.textContent = `${country.name}`;
+
+  const population = document.createElement("p");
+  population.classList.add("population");
+
+  const strongPop = document.createElement("strong");
+  strongPop.textContent = "Population : ";
+
+  const spanPop = document.createElement("span");
+  spanPop.textContent = `${
+    typeof country.population === "number"
+      ? country.population.toLocaleString()
+      : country.population
+  }`;
+
+  const region = document.createElement("p");
+  region.classList.add("region");
+
+  const strongRegion = document.createElement("strong");
+  strongRegion.textContent = "Region : ";
+
+  const spanRegion = document.createElement("span");
+  spanRegion.textContent = `${country.region}`;
+
+  const capital = document.createElement("p");
+  capital.classList.add("capital");
+
+  const strongCapital = document.createElement("strong");
+  strongCapital.textContent = "Capital : ";
+
+  const spanCapital = document.createElement("span");
+  spanCapital.textContent = `${country.capital}`;
+
+  divCountries.appendChild(img);
+  population.append(strongPop, spanPop);
+  region.append(strongRegion, spanRegion);
+  capital.append(strongCapital, spanCapital);
+
+  titleCountry.append(h2, population, region, capital);
+
+  countriesElement.append(divCountries, titleCountry);
+
+  return countriesElement;
+};
+
+const createCountriesElement = (countries) => {
+  const countriesArr = Array.isArray(countries) ? countries : [countries];
+  const texteNodes = countriesArr.map((country) => {
+    return createNodesCountry(country);
+  });
+
+  if (!countriesAllElement) return;
+  countriesAllElement.replaceChildren(...texteNodes);
+};
+
+const fetchAllCountries = async () => {
+  const response = await fetch("./data.json");
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP : (${response.status})`);
+  }
+
+  const countries = await response.json();
+  createCountriesElement(countries);
+};
+
+{
+  /* <div class="countries-elements">
+          <div class="image-country">
+            <img
+              src="https://flagcdn.com/ad.svg"
+              alt="Drapeau de l'Allemagne"
+            />
+          </div>
+          <div class="title-country">
+            <h2 class="title">Germany</h2>
+            <p class="population">
+              <strong>Population:</strong> <span>83 240 525</span>
+            </p>
+            <p class="region">
+            <strong>Region:</strong> <span>Europe</span>
+            </p>
+            <p class="capital">
+            <strong>Capital:</strong> <span>Berlin</span>
+            </p>
+          </div>
+        </div> */
+}
+
+fetchAllCountries();
