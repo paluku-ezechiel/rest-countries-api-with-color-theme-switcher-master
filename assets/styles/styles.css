@@ -103,7 +103,7 @@ main {
   left: 2.5rem;
   top: 50%;
   transform: translateY(-50%);
-  color:white;
+  color: white;
 }
 
 .input-search input {
@@ -140,4 +140,19 @@ main {
 
 .select-country select:focus {
   outline: none;
+}
+
+.countries {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4rem;
+  width: 100%;
+}
+
+.countries-elements {
+  background: var(--Blue_950);
+  color: var(--White);
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  overflow: hidden;
 }
