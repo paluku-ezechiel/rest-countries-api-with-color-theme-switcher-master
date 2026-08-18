@@ -76,32 +76,8 @@ const fetchAllCountries = async () => {
   if (!response.ok) {
     throw new Error(`Erreur HTTP : (${response.status})`);
   }
-
   const countries = await response.json();
   createCountriesElement(countries);
 };
-
-{
-  /* <div class="countries-elements">
-          <div class="image-country">
-            <img
-              src="https://flagcdn.com/ad.svg"
-              alt="Drapeau de l'Allemagne"
-            />
-          </div>
-          <div class="title-country">
-            <h2 class="title">Germany</h2>
-            <p class="population">
-              <strong>Population:</strong> <span>83 240 525</span>
-            </p>
-            <p class="region">
-            <strong>Region:</strong> <span>Europe</span>
-            </p>
-            <p class="capital">
-            <strong>Capital:</strong> <span>Berlin</span>
-            </p>
-          </div>
-        </div> */
-}
 
 fetchAllCountries();
