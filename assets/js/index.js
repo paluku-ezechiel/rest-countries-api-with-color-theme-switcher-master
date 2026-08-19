@@ -1,10 +1,18 @@
 const countriesAllElement = document.querySelector(".countries");
 const selectRegion = document.querySelector("#region-filter");
-let filtrer = "Americas";
+let filtrer = "";
+let countries = [];
+let recherche = "";
 
 selectRegion.addEventListener("change", () => {
   filtrer = selectRegion.value;
-  fetchAllCountries();
+  createCountriesElement(countries);
+});
+
+const searchInput = document.querySelector("#search-input");
+searchInput.addEventListener("input", () => {
+  recherche = searchInput.value.trim().toLowerCase();
+  createCountriesElement(countries);
 });
 
 const createNodesCountry = (country) => {
@@ -72,7 +80,15 @@ const createCountriesElement = (countries) => {
   const countriesArr = Array.isArray(countries) ? countries : [countries];
   const texteNodes = countriesArr
     .filter((pays) => {
-      return pays.region.toLowerCase() === filtrer.toLowerCase();
+      const matchRegion =
+        !filtrer ||
+        filtrer === "" ||
+        filtrer.toLocaleLowerCase() === "all" ||
+        pays.region.toLowerCase() === filtrer.toLowerCase();
+
+      const matchPays = pays.name.toLowerCase().includes(recherche);
+
+      return matchRegion && matchPays;
     })
     .map((country) => {
       return createNodesCountry(country);
@@ -87,7 +103,7 @@ const fetchAllCountries = async () => {
   if (!response.ok) {
     throw new Error(`Erreur HTTP : (${response.status})`);
   }
-  const countries = await response.json();
+  countries = await response.json();
   createCountriesElement(countries);
 };
 
