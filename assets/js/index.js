@@ -1,4 +1,11 @@
 const countriesAllElement = document.querySelector(".countries");
+const selectRegion = document.querySelector("#region-filter");
+let filtrer = "Americas";
+
+selectRegion.addEventListener("change", () => {
+  filtrer = selectRegion.value;
+  fetchAllCountries();
+});
 
 const createNodesCountry = (country) => {
   const countriesElement = document.createElement("div");
@@ -63,9 +70,13 @@ const createNodesCountry = (country) => {
 
 const createCountriesElement = (countries) => {
   const countriesArr = Array.isArray(countries) ? countries : [countries];
-  const texteNodes = countriesArr.map((country) => {
-    return createNodesCountry(country);
-  });
+  const texteNodes = countriesArr
+    .filter((pays) => {
+      return pays.region.toLowerCase() === filtrer.toLowerCase();
+    })
+    .map((country) => {
+      return createNodesCountry(country);
+    });
 
   if (!countriesAllElement) return;
   countriesAllElement.replaceChildren(...texteNodes);
