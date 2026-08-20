@@ -26,8 +26,8 @@ const createNodesCountry = (country) => {
   img.src = `${country.flags.png}`;
   img.alt = `${country.name}`;
 
-  img.addEventListener("click", () => {
-    location.assign("../../details.html");
+  countriesElement.addEventListener("click", () => {
+    location.assign(`../../details.html?code=${country.alpha3Code}`);
   });
 
   const titleCountry = document.createElement("div");
