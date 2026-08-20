@@ -175,5 +175,6 @@ main {
 .image-country img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Redimensionne et rogne l'image proprement pour remplir l'espace sans se déformer */
+  object-fit: cover;
+  cursor: pointer;
 }

@@ -26,6 +26,10 @@ const createNodesCountry = (country) => {
   img.src = `${country.flags.png}`;
   img.alt = `${country.name}`;
 
+  img.addEventListener("click", () => {
+    location.assign("../../details.html");
+  });
+
   const titleCountry = document.createElement("div");
   titleCountry.classList.add("title-country");
 
