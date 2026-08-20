@@ -137,6 +137,10 @@ const renderCountryDetails = (countryElement) => {
       spanTag.classList.add("tag");
       spanTag.textContent = `${borderName}`;
 
+      spanTag.addEventListener("click", () => {
+        location.assign(`/details.html?code=${borderCode}`);
+      });
+
       borderCountries.appendChild(spanTag);
     });
   } else {
@@ -190,12 +194,12 @@ const displayData = async () => {
     if (countryElement) {
       const countrySection = renderCountryDetails(countryElement);
 
-      if(!mainElement) return;
+      if (!mainElement) return;
 
-      mainElement.replaceChildren(countrySection)
+      mainElement.replaceChildren(countrySection);
     }
   } catch (error) {
-      console.error("Erreur lors de l'affichage :", error);
+    console.error("Erreur lors de l'affichage :", error);
   }
 };
 
