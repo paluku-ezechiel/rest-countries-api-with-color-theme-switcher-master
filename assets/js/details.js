@@ -1,56 +1,10 @@
+const mainElement = document.querySelector("main.main");
 let code;
+let countriesArr = [];
 const btnBack = document.querySelector(".btn-back");
 btnBack.addEventListener("click", () => {
   window.history.back();
 });
-
-/*
-    <section class="items">
-        <div class="item-image">
-          <img src="https://flagcdn.com/af.svg" alt="drapeau" />
-        </div>
-
-        <div class="item-container">
-          <div class="item-text">
-            <div class="item-texte-element">
-              <h2 class="title">Germany</h2>
-              <p class="native-name">
-                <strong>Native Name : </strong> <span>Deutschland</span>
-              </p>
-              <p class="population">
-                <strong>Population : </strong> <span>83 240 525</span>
-              </p>
-              <p class="region"><strong>Region : </strong> <span>Europe</span></p>
-              <p class="subRegion">
-                <strong>Sub Region : </strong> <span>western Europe</span>
-              </p>
-              <p class="capital">
-                <strong>Capital : </strong> <span>Berlin</span>
-              </p>
-            </div>
-
-            <div class="item-top-level">
-              <p class="domaine">
-                <strong>Top Level Domaine : </strong> <span>.be</span>
-              </p>
-              <p class="currencies">
-                <strong>Currencies : </strong> <span>Euro (£)</span>
-              </p>
-              <p class="language">
-                <strong>Language : </strong> <span>Dutch, French, Germany</span>
-              </p>
-            </div>
-          </div>
-
-          <div class="border-countries">
-            <strong>Border Countries : </strong>
-            <span class="tag">France</span>
-            <span class="tag">Germany</span>
-            <span class="tag">Netherlands</span>
-          </div>
-        </div>
-      </section>
-*/
 
 const renderCountryDetails = (countryElement) => {
   const section = document.createElement("section");
@@ -119,7 +73,9 @@ const renderCountryDetails = (countryElement) => {
   strongCapital.textContent = "Capital : ";
 
   const spanCapital = document.createElement("span");
-  spanCapital.textContent = `${countryElement.capital ? countryElement.capital : 'N/A'}`;
+  spanCapital.textContent = `${
+    countryElement.capital ? countryElement.capital : "N/A"
+  }`;
 
   const itemTopLevel = document.createElement("div");
   itemTopLevel.classList.add("item-top-level");
@@ -131,7 +87,9 @@ const renderCountryDetails = (countryElement) => {
   strongDomaine.textContent = "Top Level Domaine : ";
 
   const spanDomaine = document.createElement("span");
-  spanDomaine.textContent = `${countryElement.topLevelDomain ? countryElement.topLevelDomain[0] : 'N/A'}`;
+  spanDomaine.textContent = `${
+    countryElement.topLevelDomain ? countryElement.topLevelDomain[0] : "N/A"
+  }`;
 
   const currencies = document.createElement("p");
   currencies.classList.add("currencies");
@@ -140,11 +98,11 @@ const renderCountryDetails = (countryElement) => {
   strongCurrencies.textContent = "Currencies : ";
 
   const spanCurrencies = document.createElement("span");
-  if(countryElement.currencies && countryElement.currencies.length > 0){
-      const curr = countryElement.currencies[0];
-      spanCurrencies.textContent = `${curr.name} (${curr.symbol})`;
-  }else{
-      spanCurrencies.textContent = "N/A";
+  if (countryElement.currencies && countryElement.currencies.length > 0) {
+    const curr = countryElement.currencies[0];
+    spanCurrencies.textContent = `${curr.name} (${curr.symbol})`;
+  } else {
+    spanCurrencies.textContent = "N/A";
   }
 
   const language = document.createElement("p");
@@ -154,10 +112,12 @@ const renderCountryDetails = (countryElement) => {
   strongLanguage.textContent = "Language : ";
 
   const spanLanguage = document.createElement("span");
-  if(countryElement.languages && countryElement.languages.length > 0){
-      spanLanguage.textContent = `${countryElement.languages.map(lang => lang.name).join(", ")}`;
-  }else{
-      spanLanguage.textContent = 'N/A';
+  if (countryElement.languages && countryElement.languages.length > 0) {
+    spanLanguage.textContent = `${countryElement.languages
+      .map((lang) => lang.name)
+      .join(", ")}`;
+  } else {
+    spanLanguage.textContent = "N/A";
   }
 
   const borderCountries = document.createElement("div");
@@ -166,19 +126,30 @@ const renderCountryDetails = (countryElement) => {
   const strongBorderCountries = document.createElement("strong");
   strongBorderCountries.textContent = "Border Countries :";
 
-  if(countryElement.borders && countryElement.borders.length > 0){
-      
+  if (countryElement.borders && countryElement.borders.length > 0) {
+    countryElement.borders.forEach((borderCode) => {
+      const borderCountry = countriesArr.find(
+        (country) => country.alpha3Code === borderCode
+      );
+      const borderName = borderCountry ? borderCountry.name : borderCode;
+
+      const spanTag = document.createElement("span");
+      spanTag.classList.add("tag");
+      spanTag.textContent = `${borderName}`;
+
+      borderCountries.appendChild(spanTag);
+    });
+  } else {
+    const noBorders = document.createElement("span");
+    noBorders.textContent = "None";
+    borderCountries.appendChild(noBorders);
   }
 
-  const spanTag1 = document.createElement("span");
-  spanTag1.classList.add("tag");
-  spanTag1.textContent = `${countryElement}`
-
-  nativeName.appendChild(strongNative, spanNative);
-  population.appendChild(strongPopulation, spanPopulation);
-  region.appendChild(strongRegion, spanRegion);
-  subRegion.appendChild(strongSubRegion, spanSubRegion);
-  capital.appendChild(strongCapital, spanCapital);
+  nativeName.append(strongNative, spanNative);
+  population.append(strongPopulation, spanPopulation);
+  region.append(strongRegion, spanRegion);
+  subRegion.append(strongSubRegion, spanSubRegion);
+  capital.append(strongCapital, spanCapital);
   domaine.append(strongDomaine, spanDomaine);
   currencies.append(strongCurrencies, spanCurrencies);
   language.append(strongLanguage, spanLanguage);
@@ -194,6 +165,12 @@ const renderCountryDetails = (countryElement) => {
   itemTopLevel.append(domaine, currencies, language);
 
   itemImage.appendChild(img);
+
+  itemText.append(itemTextElement, itemTopLevel);
+  itemContainer.append(itemText, borderCountries);
+  section.append(itemImage, itemContainer);
+
+  return section;
 };
 
 const displayData = async () => {
@@ -206,14 +183,20 @@ const displayData = async () => {
     }
 
     const countries = await response.json();
-    const countriesArr = Array.isArray(countries) ? countries : [countries];
+    countriesArr = Array.isArray(countries) ? countries : [countries];
     const countryElement = countriesArr.find(
       (country) => country.alpha3Code === code
     );
     if (countryElement) {
-      renderCountryDetails(countryElement);
+      const countrySection = renderCountryDetails(countryElement);
+
+      if(!mainElement) return;
+
+      mainElement.replaceChildren(countrySection)
     }
-  } catch (error) {}
+  } catch (error) {
+      console.error("Erreur lors de l'affichage :", error);
+  }
 };
 
 displayData();
