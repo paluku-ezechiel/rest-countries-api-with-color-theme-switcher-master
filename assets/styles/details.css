@@ -102,3 +102,29 @@
   background-color: var(--White);
   color: var(--Blue_900);
 }
+
+@media screen and (max-width: 600px) {
+  .items {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .item-text {
+    flex-direction: column;
+    flex-direction: 0;
+    gap: 2rem;
+    padding: 0;
+  }
+
+  .item-texte-element {
+    width: 100%;
+  }
+
+  .item-top-level {
+    width: 100%;
+  }
+
+  .border-countries {
+    flex-flow: row wrap;
+  }
+}

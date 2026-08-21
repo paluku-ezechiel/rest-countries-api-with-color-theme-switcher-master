@@ -107,7 +107,7 @@ main {
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
 }
 
-.dark-mode .input-search{
+.dark-mode .input-search {
   background-color: var(--White);
 }
 
@@ -119,7 +119,7 @@ main {
   color: white;
 }
 
-.dark-mode .input-search i{
+.dark-mode .input-search i {
   color: var(--Blue_950);
 }
 
@@ -163,7 +163,7 @@ main {
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
 }
 
-.dark-mode .select-country select{
+.dark-mode .select-country select {
   background-color: var(--White);
   color: var(--Blue_950);
 }
@@ -189,7 +189,7 @@ main {
   cursor: pointer;
 }
 
-.dark-mode .countries-elements{
+.dark-mode .countries-elements {
   background-color: var(--White);
   color: var(--Blue_950);
 }
@@ -212,4 +212,20 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+  .countries {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .countries {
+    grid-template-columns: 1fr;
+  }
+
+  .section.search-All {
+    flex-direction: column;
+  }
 }
