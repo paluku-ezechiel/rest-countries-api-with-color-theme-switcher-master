@@ -1,5 +1,12 @@
 const countriesAllElement = document.querySelector(".countries");
 const selectRegion = document.querySelector("#region-filter");
+const darkMode = document.querySelector(".mode-dark");
+
+darkMode.addEventListener("click", (event) => {
+  const dark = event.currentTarget;
+  document.body.classList.toggle("dark-mode");
+});
+
 let filtrer = "";
 let countries = [];
 let recherche = "";

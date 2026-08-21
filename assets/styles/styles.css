@@ -25,6 +25,10 @@ body {
   min-height: 100vh;
 }
 
+body.dark-mode {
+  background-color: var(--White);
+}
+
 header.container {
   display: flex;
   align-items: center;
@@ -33,6 +37,11 @@ header.container {
   color: var(--White);
   padding: 2rem 4rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode header.container {
+  background-color: var(--White);
+  color: var(--Blue_950);
 }
 
 header.container h1 {
@@ -98,12 +107,20 @@ main {
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
 }
 
+.dark-mode .input-search{
+  background-color: var(--White);
+}
+
 .input-search i {
   position: absolute;
   left: 2.5rem;
   top: 50%;
   transform: translateY(-50%);
   color: white;
+}
+
+.dark-mode .input-search i{
+  color: var(--Blue_950);
 }
 
 .input-search input {
@@ -115,6 +132,10 @@ main {
   font-size: 1.4rem;
 }
 
+.dark-mode .input-search input {
+  color: var(--Blue_950);
+}
+
 .input-search input:focus {
   outline: none;
 }
@@ -122,6 +143,10 @@ main {
 .input-search input::placeholder {
   color: var(--White);
   opacity: 0.8;
+}
+
+.dark-mode .input-search input::placeholder {
+  color: var(--Blue_950);
 }
 
 /* Style pour le menu déroulant (Select) */
@@ -136,6 +161,11 @@ main {
   font-size: 1.4rem;
   cursor: pointer;
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .select-country select{
+  background-color: var(--White);
+  color: var(--Blue_950);
 }
 
 .select-country select:focus {
@@ -157,6 +187,11 @@ main {
   overflow: hidden;
   width: 100%;
   cursor: pointer;
+}
+
+.dark-mode .countries-elements{
+  background-color: var(--White);
+  color: var(--Blue_950);
 }
 
 .title-country {

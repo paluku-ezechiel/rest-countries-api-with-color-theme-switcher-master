@@ -1,6 +1,13 @@
 const mainElement = document.querySelector("main.main");
 let code;
 let countriesArr = [];
+const modeDark = document.querySelector(".mode-dark");
+
+modeDark.addEventListener("click", (event) => {
+  event.currentTarget;
+  document.body.classList.toggle("dark-mode");
+});
+
 const btnBack = document.querySelector(".btn-back");
 btnBack.addEventListener("click", () => {
   window.history.back();
